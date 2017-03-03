@@ -1,0 +1,21 @@
+{
+  "name": "jzweb/open-weixin",
+  "description": "微信开放平台接口",
+  "type": "library",
+  "authors": [
+    {
+      "name": "liusongsen",
+      "email": "liusongsen@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.4.0",
+    "guzzlehttp/guzzle": "5.3.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "jzweb\\open\\weixin\\": "src/"
+    }
+  }
+}
