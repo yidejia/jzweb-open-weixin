@@ -13,7 +13,7 @@ class accessToken
 {
 
     private $getAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=%s";
-    private $refreshAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=%s&grant_type=refresh_token&refresh_token=REFRESH_TOKEN";
+    private $refreshAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=%s&grant_type=%s&refresh_token=%s";
 
     /**
      * 通过code获取access_token接口
@@ -35,7 +35,8 @@ class accessToken
      */
     public function getAccessTokenByCode($app_id, $secret, $code, $grant_type = "authorization_code")
     {
-        return http::get($this->getAccessTokenUrl, $app_id, $secret, $code, $grant_type);
+        $requestUrl = sprintf($this->getAccessTokenUrl, $app_id, $secret, $code, $grant_type);
+        return http::get($requestUrl);
     }
 
 
@@ -58,6 +59,7 @@ class accessToken
      */
     public function refreshAccessToken($app_id, $refresh_token, $grant_type = "refresh_token")
     {
-        return http::get($this->getAccessTokenByCode($app_id, $refresh_token, $grant_type));
+        $requestUrl = sprintf($this->refreshAccessTokenUrl, $app_id, $refresh_token, $grant_type);
+        return http::get($requestUrl);
     }
 }
