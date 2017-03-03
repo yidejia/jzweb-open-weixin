@@ -10,8 +10,8 @@ use jzweb\open\weixin\website\wxLogin;
  * @date 2017/3/3
  */
 
-$app_id = "wx8a144d60548d666d";
-$secret = "49d258b8b1d4533dc770ee8c0a9e6f0f";
+$app_id = "sdfsdfsdf";
+$secret = "sdfsdfsdfsdfsdf";
 $wxLogin = new wxLogin($app_id, $secret);
 
 //构造获取code的url
