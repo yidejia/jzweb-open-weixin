@@ -53,12 +53,13 @@ class wxLogin
     /**
      * 第三步：获取微信用户信息
      *
+     * @param string $open_id 	普通用户标识，对该公众帐号唯一
      * @param string $access_token 第二步获取到的access_token
      * @return array
      */
-    public function getUser($access_token)
+    public function getUser($open_id,$access_token)
     {
-        return (new user())->get($this->app_id, $access_token);
+        return (new user())->get($open_id, $access_token);
     }
 
     /**
