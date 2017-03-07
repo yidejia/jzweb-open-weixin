@@ -1,5 +1,5 @@
 <?php
-namespace jzweb\open\weixin\website;
+namespace jzweb\open\weixin\mp;
 
 use jzweb\open\weixin\lib\accessToken;
 use jzweb\open\weixin\lib\code;
