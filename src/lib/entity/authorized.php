@@ -18,35 +18,22 @@ namespace jzweb\open\weixin\lib\entity;
  */
 class authorized
 {
-    private $data = array();
-
-    /**
-     * ticket constructor.
-     * @param $xml_content 接收到的XML格式内容的数据
-     */
-    public function __construct($xml_content)
-    {
-        //处理XML
-        $obj = new \SimpleXMLElement ($xml_content);
-        foreach ($obj as $key => $value) {
-            $this->data[$key] = strval($value);
-        }
-    }
 
     /**
      * 转换为数组
      *
+     * @param array $obj 要转换的对象数组
      * @return array
      */
-    public function toArray()
+    public function toArray($obj)
     {
         return array(
-            "app_id" => $this->data['AppId'],
-            "create_time" => $this->data['CreateTime'],
-            "info_type" => $this->data['InfoType'],
-            "authorizer_appid" => $this->data['AuthorizerAppid'],
-            "authorizer_code" => $this->data['AuthorizationCode'],
-            "authorizer_code_expired_time" => $this->data['AuthorizationCodeExpiredTime']
+            "app_id" => $obj['AppId'],
+            "create_time" => $obj['CreateTime'],
+            "info_type" => $obj['InfoType'],
+            "authorizer_appid" => $obj['AuthorizerAppid'],
+            "authorizer_code" => $obj['AuthorizationCode'],
+            "authorizer_code_expired_time" => $obj['AuthorizationCodeExpiredTime']
         );
     }
 }
