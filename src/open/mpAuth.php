@@ -75,7 +75,7 @@ class mpAuth
      * @param string $component_access_token 第三方平台access_token
      * @return array
      */
-    public function getApiQueryAuth($authorization_code, $component_access_token)
+    public function getQueryAuth($authorization_code, $component_access_token)
     {
 
         return $this->component->getApiQueryAuth($this->app_id, $authorization_code, $component_access_token);
@@ -89,7 +89,7 @@ class mpAuth
      * @param string $component_access_token 第三方平台access_token
      * @return array
      */
-    public function getApiAuthorizerToken($authorizer_appid, $authorizer_refresh_token, $component_access_token)
+    public function getAuthorizerToken($authorizer_appid, $authorizer_refresh_token, $component_access_token)
     {
         return $this->component->getApiAuthorizerToken($this->app_id, $authorizer_appid, $authorizer_refresh_token, $component_access_token);
     }
@@ -101,7 +101,7 @@ class mpAuth
      * @param string $component_access_token 第三方平台access_token
      * @return array
      */
-    public function test($authorizer_appid, $component_access_token)
+    public function getAuthorizerInfo($authorizer_appid, $component_access_token)
     {
         return $this->component->getApiGetAuthorizerInfo($this->app_id, $authorizer_appid, $component_access_token);
     }
@@ -114,7 +114,7 @@ class mpAuth
      * @param string $component_access_token 第三方平台access_token
      * @return array
      */
-    public function getApiGetAuthorizerOption($authorizer_appid, $option_name, $component_access_token)
+    public function getAuthorizerOption($authorizer_appid, $option_name, $component_access_token)
     {
         return $this->component->getApiGetAuthorizerOption($this->app_id, $authorizer_appid, $option_name, $component_access_token);
     }
@@ -128,7 +128,7 @@ class mpAuth
      * @param string $component_access_token 第三方平台access_token
      * @return array
      */
-    public function getApiSetAuthorizerOption($authorizer_appid, $option_name, $option_value, $component_access_token)
+    public function setAuthorizerOption($authorizer_appid, $option_name, $option_value, $component_access_token)
     {
 
         return $this->component->getApiSetAuthorizerOption($this->app_id, $authorizer_appid, $option_name, $option_value, $component_access_token);
