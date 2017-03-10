@@ -32,19 +32,19 @@ class entity
         }
         switch ($data['InfoType']) {
             case "unauthorized";
-                $result = (new unauthorized($data))->toArray();
+                $result = array('msgType' => "unauthorized", 'data' => (new unauthorized($data))->toArray());
                 break;
             case "authorized";
-                $result = (new authorized($data))->toArray();
+                $result = array('msgType' => "authorized", 'data' => (new authorized($data))->toArray());
                 break;
             case "updateauthorized";
-                $result = (new updateauthorized())->toArray();
+                $result = array('msgType' => "updateauthorized", 'data' => (new updateauthorized())->toArray());
                 break;
             case "component_verify_ticket";
-                $result = (new ticket())->toArray();
+                $result = array('msgType' => "component_verify_ticket", 'data' => (new ticket())->toArray());
                 break;
             default:
-                $result = $data;
+                $result = array('msgType' => "unknown", 'data' => $data);
                 break;
         }
         return $result;

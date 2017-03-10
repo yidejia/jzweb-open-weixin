@@ -25,6 +25,7 @@ class ticket
     public function toArray($obj)
     {
         return array(
+            'the_time' => date("Y-m-d H:i:s"),
             "app_id" => $obj['AppId'],
             "create_time" => $obj['CreateTime'],
             "info_type" => $obj['InfoType'],
