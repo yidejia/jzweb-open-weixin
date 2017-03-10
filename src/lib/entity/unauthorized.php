@@ -22,7 +22,7 @@ class unauthorized
      * @param array $obj 要转换的对象数组
      * @return array
      */
-    public function toArray($obj)
+    public static function toArray($obj)
     {
         return array(
             'the_time' => date("Y-m-d H:i:s"),
