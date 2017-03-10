@@ -15,6 +15,7 @@ class component
 
     private $getComponentAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/component/api_component_token";
     private $getPreAuthCodeUrl = "https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token=%s";
+    private $getComponentLoginPageUrl = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=%s&pre_auth_code=%s&redirect_uri=%s";
     private $getApiQueryAuthUrl = "https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token=%s";
     private $getApiAuthorizerTokenUrl = "https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token=%s";
     private $getApiGetAuthorizerInfoUrl = "https://api.weixin.qq.com/cgi-bin/component/api_get_authorizer_info?component_access_token=%s";
@@ -63,6 +64,20 @@ class component
             "component_appid" => $component_appid
         );
         return http::post($url, json_encode($postData));
+    }
+
+    /**
+     * 引入用户进入授权页
+     *
+     * @param string $component_appid 第三方平台方appid
+     * @param string $pre_auth_code 预授权码
+     * @param string $redirect_uri 回调URI
+     *
+     * @return string
+     */
+    public function getComponentLoginPage($component_appid, $pre_auth_code, $redirect_uri)
+    {
+        return sprintf($this->getComponentLoginPageUrl, $component_appid, $pre_auth_code, $redirect_uri);
     }
 
 
