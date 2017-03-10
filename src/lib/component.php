@@ -115,7 +115,7 @@ class component
      *
      * @return array
      */
-    public function getApiQueryAuth($component_appid, $authorization_code, $component_access_token)
+    public function getQueryAuth($component_appid, $authorization_code, $component_access_token)
     {
         $url = sprintf($this->getApiQueryAuthUrl, $component_access_token);
         $postData = array(
@@ -141,7 +141,7 @@ class component
      *  }
      * @return array
      */
-    public function getApiAuthorizerToken($component_appid, $authorizer_appid, $authorizer_refresh_token, $component_access_token)
+    public function getAuthorizerToken($component_appid, $authorizer_appid, $authorizer_refresh_token, $component_access_token)
     {
         $url = sprintf($this->getApiAuthorizerTokenUrl, $component_access_token);
         $postData = array(
@@ -184,7 +184,7 @@ class component
      * }
      * @return array
      */
-    public function getApiGetAuthorizerInfo($component_appid, $authorizer_appid, $component_access_token)
+    public function getAuthorizerInfo($component_appid, $authorizer_appid, $component_access_token)
     {
         $url = sprintf($this->getApiGetAuthorizerInfoUrl, $component_access_token);
         $postData = array(
@@ -211,7 +211,7 @@ class component
      *
      * @return array
      */
-    public function getApiGetAuthorizerOption($component_appid, $authorizer_appid, $option_name, $component_access_token)
+    public function getAuthorizerOption($component_appid, $authorizer_appid, $option_name, $component_access_token)
     {
         $url = sprintf($this->getApiGetAuthorizerOptionUrl, $component_access_token);
         $postData = array(
@@ -239,7 +239,7 @@ class component
      *
      * @return array
      */
-    public function getApiSetAuthorizerOption($component_appid, $authorizer_appid, $option_name, $option_value, $component_access_token)
+    public function setAuthorizerOption($component_appid, $authorizer_appid, $option_name, $option_value, $component_access_token)
     {
         $url = sprintf($this->getApiSetAuthorizerOptionUrl, $component_access_token);
         $postData = array(

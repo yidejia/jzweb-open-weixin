@@ -78,7 +78,7 @@ class mpAuth
     public function getQueryAuth($authorization_code, $component_access_token)
     {
 
-        return $this->component->getApiQueryAuth($this->app_id, $authorization_code, $component_access_token);
+        return $this->component->getQueryAuth($this->app_id, $authorization_code, $component_access_token);
     }
 
     /**
@@ -91,7 +91,7 @@ class mpAuth
      */
     public function getAuthorizerToken($authorizer_appid, $authorizer_refresh_token, $component_access_token)
     {
-        return $this->component->getApiAuthorizerToken($this->app_id, $authorizer_appid, $authorizer_refresh_token, $component_access_token);
+        return $this->component->getAuthorizerToken($this->app_id, $authorizer_appid, $authorizer_refresh_token, $component_access_token);
     }
 
     /**
@@ -103,7 +103,7 @@ class mpAuth
      */
     public function getAuthorizerInfo($authorizer_appid, $component_access_token)
     {
-        return $this->component->getApiGetAuthorizerInfo($this->app_id, $authorizer_appid, $component_access_token);
+        return $this->component->getAuthorizerInfo($this->app_id, $authorizer_appid, $component_access_token);
     }
 
     /**
@@ -116,7 +116,7 @@ class mpAuth
      */
     public function getAuthorizerOption($authorizer_appid, $option_name, $component_access_token)
     {
-        return $this->component->getApiGetAuthorizerOption($this->app_id, $authorizer_appid, $option_name, $component_access_token);
+        return $this->component->getAuthorizerOption($this->app_id, $authorizer_appid, $option_name, $component_access_token);
     }
 
     /**
@@ -131,6 +131,6 @@ class mpAuth
     public function setAuthorizerOption($authorizer_appid, $option_name, $option_value, $component_access_token)
     {
 
-        return $this->component->getApiSetAuthorizerOption($this->app_id, $authorizer_appid, $option_name, $option_value, $component_access_token);
+        return $this->component->setAuthorizerOption($this->app_id, $authorizer_appid, $option_name, $option_value, $component_access_token);
     }
 }
