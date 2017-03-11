@@ -31,3 +31,5 @@ if (!$pre_auth_code) {
 #第三步：引用用户进入授权页
 $url = $mpAuth->getComponentloginpageUrl($pre_auth_code, urlencode($redirect_uri));
 echo $url . "\n";
+
+
