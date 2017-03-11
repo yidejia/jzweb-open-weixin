@@ -42,7 +42,7 @@ class component
             "component_appsecret" => $component_appsecret,
             "component_verify_ticket" => $component_verify_ticket
         );
-        return http::post($this->getComponentAccessTokenUrl, json_encode($postData));
+        return http::post($this->getComponentAccessTokenUrl, [], json_encode($postData));
     }
 
     /**
@@ -63,7 +63,7 @@ class component
         $postData = array(
             "component_appid" => $component_appid
         );
-        return http::post($url, json_encode($postData));
+        return http::post($url, [], json_encode($postData));
     }
 
     /**
@@ -122,7 +122,7 @@ class component
             "component_appid" => $component_appid,
             "authorization_code" => $authorization_code
         );
-        return http::post($url, json_encode($postData));
+        return http::post($url, [], json_encode($postData));
     }
 
 
@@ -149,7 +149,7 @@ class component
             "authorizer_appid" => $authorizer_appid,
             "authorizer_refresh_token" => $authorizer_refresh_token
         );
-        return http::post($url, json_encode($postData));
+        return http::post($url, [], json_encode($postData));
     }
 
 
@@ -191,7 +191,7 @@ class component
             "component_appid" => $component_appid,
             "authorizer_appid" => $authorizer_appid,
         );
-        return http::post($url, json_encode($postData));
+        return http::post($url, [], json_encode($postData));
     }
 
     /**
@@ -219,7 +219,7 @@ class component
             "authorizer_appid" => $authorizer_appid,
             "option_name" => $option_name
         );
-        return http::post($url, json_encode($postData));
+        return http::post($url, [], json_encode($postData));
     }
 
 
@@ -248,6 +248,6 @@ class component
             "option_name" => $option_name,
             "option_value" => $option_value
         );
-        return http::post($url, json_encode($postData));
+        return http::post($url, [], json_encode($postData));
     }
 }
