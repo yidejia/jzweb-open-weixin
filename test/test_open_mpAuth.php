@@ -13,8 +13,8 @@ $app_id = "wx619be6018fec9c45";
 $secret = "827327a10043c870190b244ad3fcde9a";
 $ticket = "ticket@@@_KwChdo7lgVbNKtPmMiFj2GPHLmhxyP2sBS0g9DiGjBrMJj-Lxdb8bfzqgvZIsxiP__K-4sMLHHVZSx9JpIr9w";
 
-$component_access_token = "eBEYAF0XQ8gSz75vCCgUJz9lzrGVEEojee4ceCQ3URDs1Uf6sWFTvfTmGSgGo-wIpCYAhcj1pL0SnHZukJeb5PXBFhjOYk9o1iUgh-RoeSV-MEKRKmF_WacNBt_WyO0gLPCeAFABFS";
-$pre_auth_code = "preauthcode@@@dRq6qKlRNQqqLdotofo0ZbSfpfwv4cVaxoBP6odEZAnKFdd946LlNvNeoPhmCmVT";
+$component_access_token = "q7h40kHcmJYSLMA3h0InRVPKvgp6Wrj-INYMejBGqdbrvveEcigV6QrQJMCRm5hqrbdnmoyebq6aIzsobV95eSyUm3LoEugBvoyFEImkamRxdut17RR84AAxFunMR78JJBIdACAYQX";
+$pre_auth_code = "preauthcode@@@_8FuDJcsf2srvBTz4ASNMQVKUnYnbZH0jc4oQ58zQy5SyYYmH-66Kyq9g8kZCay7";
 $redirect_uri = "http://test.atido.com/wx_auth_callback.php";
 
 $mpAuth = new mpAuth($app_id, $secret);
