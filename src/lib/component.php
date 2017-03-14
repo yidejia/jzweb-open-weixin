@@ -17,7 +17,7 @@ class component
     private $getPreAuthCodeUrl = "https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token=%s";
     private $getComponentLoginPageUrl = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=%s&pre_auth_code=%s&redirect_uri=%s";
     private $getApiQueryAuthUrl = "https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token=%s";
-    private $getApiAuthorizerTokenUrl = "https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token=%s";
+    private $getApiAuthorizerTokenUrl = "https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=%s";
     private $getApiGetAuthorizerInfoUrl = "https://api.weixin.qq.com/cgi-bin/component/api_get_authorizer_info?component_access_token=%s";
     private $getApiGetAuthorizerOptionUrl = "https://api.weixin.qq.com/cgi-bin/component/ api_get_authorizer_option?component_access_token=%s";
     private $getApiSetAuthorizerOptionUrl = "https://api.weixin.qq.com/cgi-bin/component/ api_set_authorizer_option?component_access_token=%s";
