@@ -1,5 +1,5 @@
 <?php
-namespace jzweb\open\weixin\lib\entity\atuh;
+namespace jzweb\open\weixin\lib\entity\auth;
 
 /**
  * 微信开放平台-授权更新通知-实体对象
