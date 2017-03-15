@@ -1,18 +1,18 @@
 <?php
 namespace jzweb\open\weixin\lib;
 
-use jzweb\open\weixin\lib\entity\authorized;
-use jzweb\open\weixin\lib\entity\ticket;
-use jzweb\open\weixin\lib\entity\unauthorized;
-use jzweb\open\weixin\lib\entity\updateauthorized;
+use jzweb\open\weixin\lib\entity\auth\authorizedAuth;
+use jzweb\open\weixin\lib\entity\auth\ticketAuth;
+use jzweb\open\weixin\lib\entity\auth\unauthorizedAuth;
+use jzweb\open\weixin\lib\entity\auth\updateauthorizedAuth;
 
 /**
- * 微信的实体对象
+ * 微信授权实体对象
  *
  * @user 刘松森 <liusongsen@gmail.com>
  * @date 2017/3/10
  */
-class entity
+class entityAuth
 {
 
 
@@ -30,18 +30,19 @@ class entity
         foreach ($obj as $key => $value) {
             $data[$key] = strval($value);
         }
+
         switch ($data['InfoType']) {
             case "unauthorized";
-                $result = array('msg_type' => "unauthorized", 'data' => unauthorized::toArray($data));
+                $result = array('msg_type' => "unauthorized", 'data' => unauthorizedAuth::toArray($data));
                 break;
             case "authorized";
-                $result = array('msg_type' => "authorized", 'data' => authorized::toArray($data));
+                $result = array('msg_type' => "authorized", 'data' => authorizedAuth::toArray($data));
                 break;
             case "updateauthorized";
-                $result = array('msg_type' => "updateauthorized", 'data' => updateauthorized::toArray($data));
+                $result = array('msg_type' => "updateauthorized", 'data' => updateauthorizedAuth::toArray($data));
                 break;
             case "component_verify_ticket";
-                $result = array('msg_type' => "component_verify_ticket", 'data' => ticket::toArray($data));
+                $result = array('msg_type' => "component_verify_ticket", 'data' => ticketAuth::toArray($data));
                 break;
             default:
                 $result = array('msg_type' => "unknown", 'data' => $data);

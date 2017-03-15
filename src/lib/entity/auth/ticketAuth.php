@@ -1,20 +1,20 @@
 <?php
-namespace jzweb\open\weixin\lib\entity;
+namespace jzweb\open\weixin\lib\entity\auth;
 
 /**
- * 微信开放平台-取消授权通知-实体对象
+ * 微信开放平台-推送component_verify_ticket协议-实体对象
  *
- *<xml>
- *<AppId>第三方平台appid</AppId>
- *<CreateTime>1413192760</CreateTime>
- *<InfoType>unauthorized</InfoType>
- *<AuthorizerAppid>公众号appid</AuthorizerAppid>
- *</xml>
+ * <xml>
+ * <AppId> </AppId>
+ * <CreateTime>1413192605 </CreateTime>
+ * <InfoType> </InfoType>
+ * <ComponentVerifyTicket> </ComponentVerifyTicket>
+ * </xml>
  *
  * @user 刘松森 <liusongsen@gmail.com>
  * @date 2017/3/10
  */
-class unauthorized
+class ticketAuth
 {
     /**
      * 转换为数组
@@ -29,7 +29,7 @@ class unauthorized
             "app_id" => $obj['AppId'],
             "create_time" => $obj['CreateTime'],
             "info_type" => $obj['InfoType'],
-            "authorizer_appid" => $obj['AuthorizerAppid']
+            "component_verify_ticket" => $obj['ComponentVerifyTicket']
         );
     }
 }

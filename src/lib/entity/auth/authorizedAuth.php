@@ -1,5 +1,5 @@
 <?php
-namespace jzweb\open\weixin\lib\entity;
+namespace jzweb\open\weixin\lib\entity\auth;
 
 /**
  * 微信开放平台-授权成功通知-实体对象
@@ -16,7 +16,7 @@ namespace jzweb\open\weixin\lib\entity;
  * @user 刘松森 <liusongsen@gmail.com>
  * @date 2017/3/10
  */
-class authorized
+class authorizedAuth
 {
 
     /**

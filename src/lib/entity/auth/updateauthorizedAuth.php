@@ -1,5 +1,5 @@
 <?php
-namespace jzweb\open\weixin\lib\entity;
+namespace jzweb\open\weixin\lib\entity\atuh;
 
 /**
  * 微信开放平台-授权更新通知-实体对象
@@ -16,7 +16,7 @@ namespace jzweb\open\weixin\lib\entity;
  * @user 刘松森 <liusongsen@gmail.com>
  * @date 2017/3/10
  */
-class updateauthorized
+class updateauthorizedAuth
 {
     /**
      * 转换为数组
