@@ -36,7 +36,6 @@ class locationMsg
             "from_user_name" => $obj['FromUserName'],
             "create_time" => $obj['CreateTime'],
             "msg_type" => $obj['MsgType'],
-            "media_id" => $obj['MediaId'],
             "location_x" => $obj['Location_X'],
             "location_y" => $obj['Location_Y'],
             "scale" => $obj['Scale'],
