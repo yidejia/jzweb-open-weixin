@@ -38,7 +38,7 @@ class locationEvent
             "event" => $obj['Event'],
             "latitude" => $obj['Latitude'],
             "longitude" => $obj['Longitude'],
-            "precision" => $obj['Precision']
+            "precision_val" => $obj['Precision']
         );
     }
 }
