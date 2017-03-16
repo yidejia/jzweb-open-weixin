@@ -62,4 +62,18 @@ class wxLogin
         return (new user())->get($open_id, $access_token);
     }
 
+    /**
+     * 获取微信用户列表
+     *
+     * @param string $access_token 公众号接口调用凭证
+     * @param string $next_open_id 第一个拉取的OPENID，不填默认从头开始拉取
+     *
+     * @return array
+     */
+    public function getUserList($access_token, $next_open_id)
+    {
+
+        return (new user())->getList($access_token, $next_open_id);
+    }
+
 }
