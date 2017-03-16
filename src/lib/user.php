@@ -72,7 +72,7 @@ class user
      */
     public function getList($access_token, $next_openid = "")
     {
-        $requestUrl = sprintf($this->url, $access_token, $next_openid);
+        $requestUrl = sprintf($this->getUserListUrl, $access_token, $next_openid);
         return http::get($requestUrl);
     }
 }
