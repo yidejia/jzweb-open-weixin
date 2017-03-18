@@ -63,6 +63,20 @@ class wxLogin
     }
 
     /**
+     * 批量获取用户基本信息
+     *
+     * @param string $access_token 公众号接口调用凭证
+     * @param array $openid_arr 包含openid的一纬数组
+     *
+     * @return array
+     */
+    public function batchGetUserList($access_token, $openid_arr)
+    {
+
+        return (new user())->batchget($access_token, $openid_arr);
+    }
+
+    /**
      * 获取微信用户列表
      *
      * @param string $access_token 公众号接口调用凭证
