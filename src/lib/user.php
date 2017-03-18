@@ -15,6 +15,7 @@ class user
     //请求的接口地址
     private $url = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s";
     private $getUserListUrl = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";
+    private $getBatchGetUrl = "https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=%s";
 
     /**
      * 通过OpenID获取微信个人用户信息
@@ -75,4 +76,41 @@ class user
         $requestUrl = sprintf($this->getUserListUrl, $access_token, $next_openid);
         return http::get($requestUrl);
     }
+
+
+    /**
+     * 批量获取用户基本信息
+     * 开发者可通过该接口来批量获取用户基本信息。最多支持一次拉取100条。
+     *
+     * {
+     *"user_list": [
+     *{
+     *"openid": "otvxTs4dckWG7imySrJd6jSi0CWE",
+     *"lang": "zh-CN"
+     *},
+     *{
+     *"openid": "otvxTs_JZ6SEiP0imdhpi50fuSZg",
+     *"lang": "zh-CN"
+     *}
+     *]
+     *}*
+     *
+     * @param $access_token 调用接口凭证
+     * @param string $openid_arr 包含openid的一纬数组
+     *
+     * @return array
+     */
+    public function batchget($access_token, $openid_arr)
+    {
+        $requestUrl = sprintf($this->getBatchGetUrl, $access_token);
+        $openid_list = array();
+        //转换格式
+        foreach ($openid_arr as $openid) {
+            $openid_list[] = array("openid" => $openid, "lang" => "zh-CN");
+        }
+        $postData = array("user_list" => $openid_list);
+        return http::post($requestUrl, [], json_encode($postData));
+    }
+
+
 }
