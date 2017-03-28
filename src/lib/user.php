@@ -14,6 +14,7 @@ class user
 
     //请求的接口地址
     private $url = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s";
+    private $url1 = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN";
     private $getUserListUrl = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";
     private $getBatchGetUrl = "https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=%s";
 
@@ -22,6 +23,7 @@ class user
      *
      * @param string $open_id 普通用户的标识，对当前开发者帐号唯一
      * @param string $access_token 调用凭证
+     * 开放平台网站应用
      *
      *
      *  {
@@ -45,6 +47,37 @@ class user
     public function get($open_id, $access_token)
     {
         $requestUrl = sprintf($this->url, $access_token, $open_id);
+        return http::get($requestUrl);
+    }
+
+    /**
+     * 通过OpenID获取微信个人用户信息
+     * 开放平台第三方公众号平台
+     *
+     * {
+     *"subscribe": 1,
+     *"openid": "o6_bmjrPTlm6_2sgVt7hMZOPfL2M",
+     *"nickname": "Band",
+     *"sex": 1,
+     *"language": "zh_CN",
+     *"city": "广州",
+     *"province": "广东",
+     *"country": "中国",
+     *"headimgurl":  "http://wx.qlogo.cn/mmopen/g3MonUZtNHkdmzicIlibx6iaFqAc56vxLSUfpb6n5WKSYVY0ChQKkiaJSgQ1dZuTOgvLLrhJbERQQ4
+     *eMsv84eavHiaiceqxibJxCfHe/0",
+     *"subscribe_time": 1382694957,
+     *"unionid": " o6_bmasdasdsad6_2sgVt7hMZOPfL"
+     *"remark": "",
+     *"groupid": 0,
+     *"tagid_list":[128,2]
+     * }
+     * @param string $open_id 普通用户的标识，对当前开发者帐号唯一
+     * @param string $access_token 调用接口凭证
+     * @return array
+     */
+    public function get1($open_id, $access_token)
+    {
+        $requestUrl = sprintf($this->url1, $access_token, $open_id);
         return http::get($requestUrl);
     }
 
