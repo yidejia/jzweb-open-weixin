@@ -109,5 +109,42 @@ class replay
         return "<xml><ToUserName><![CDATA[" . $to_user . "]]></ToUserName><FromUserName><![CDATA[" . $from_user . "]]></FromUserName><CreateTime>" . $the_time . "</CreateTime><MsgType><![CDATA[news]]></MsgType><ArticleCount>" . count($data) . "</ArticleCount><Articles>" . $str . "</Articles></xml>";
     }
 
+    /**
+     * 构建回复消息
+     *
+     * @param string $type 回复消息类型
+     * @param string $to_user 接收方微信用户openid
+     * @param string $from_user 开发者微信号
+     * @param int $the_time 消息发送时间
+     * @param string|array $data 发送的消息内容
+     *
+     * @return string
+     */
+    public static function replayMsg($type, $to_user, $from_user, $the_time, $data)
+    {
+
+        switch ($type) {
+            case "text":
+                $result = self::replayText($to_user, $from_user, $the_time, $data);
+                break;
+            case "image":
+                $result = self::replayImage($to_user, $from_user, $the_time, $data);
+                break;
+            case "voice":
+                $result = self::replayVoice($to_user, $from_user, $the_time, $data);
+                break;
+            case "video":
+                $result = self::replayVideo($to_user, $from_user, $the_time, json_decode($data, true));
+                break;
+            case "music":
+                $result = self::replayMusic($to_user, $from_user, $the_time, json_decode($data, true));
+                break;
+            default:
+                $result = self::replayNews($to_user, $from_user, $the_time, json_decode($data, true));
+                break;
+        }
+        return $result;
+    }
+
 
 }
