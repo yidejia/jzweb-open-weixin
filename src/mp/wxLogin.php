@@ -3,6 +3,7 @@ namespace jzweb\open\weixin\mp;
 
 use jzweb\open\weixin\lib\accessToken;
 use jzweb\open\weixin\lib\code;
+use jzweb\open\weixin\lib\custom;
 use jzweb\open\weixin\lib\user;
 
 /**
@@ -100,6 +101,23 @@ class wxLogin
     {
 
         return (new user())->getList($access_token, $next_open_id);
+    }
+
+
+    /**
+     * 微信公众号客户发送接口
+     *
+     * @param string $access_token 公众号接口调用凭证
+     * @param string $type 发送的消息类型
+     * @param string $openid 发送的微信用户openid
+     * @param string|array $data 发送的内容
+     *
+     * @return array
+     */
+    public function customSend($access_token, $type, $openid, $data)
+    {
+
+        return (new custom())->send($type, $access_token, $openid, $data);
     }
 
 }
