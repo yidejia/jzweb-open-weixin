@@ -24,11 +24,7 @@ class http
 
         try {
             $client = new \GuzzleHttp\Client();
-            if ($header) {
-                $response = $client->get($url)->getBody()->getContents();
-            } else {
-                $response = $client->get($url, ['headers' => $header, 'body' => $body])->getBody()->getContents();
-            }
+            $response = $client->get($url, ['headers' => $header, 'body' => $body])->getBody()->getContents();
             if (!$response) {
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
@@ -50,19 +46,16 @@ class http
      * @param string $url
      * @param array $header
      * @param string $body
+     * @param array $multipart
      *
      * @return mix
      */
-    public static function post($url, $header = [], $body = "")
+    public static function post($url, $header = [], $body = "", $multipart = [])
     {
 
         try {
             $client = new \GuzzleHttp\Client();
-            if ($header) {
-                $response = $client->post($url)->getBody()->getContents();
-            } else {
-                $response = $client->post($url, ['headers' => $header, 'body' => $body])->getBody()->getContents();
-            }
+            $response = $client->post($url, ['headers' => $header, 'body' => $body, 'multipart' => $multipart])->getBody()->getContents();
             if (!$response) {
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
