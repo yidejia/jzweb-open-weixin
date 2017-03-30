@@ -16,6 +16,8 @@ class custom
 
     /**
      * 客服接口---发送消息
+     * 注意中文处理：微信接收到的是非unicode编码的utf-8编码
+     * 如果不处理，微信得到的消息将会是乱码(中文unicode)
      *
      * @param string $type 发送类型
      * @param string $access_token 调用凭证
@@ -59,6 +61,6 @@ class custom
         }
 
         $requestUrl = sprintf($this->url, $access_token);
-        return http::post($requestUrl, [], json_encode($postData));
+        return http::post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 }
