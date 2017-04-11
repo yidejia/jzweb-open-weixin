@@ -55,7 +55,11 @@ class http
 
         try {
             $client = new \GuzzleHttp\Client();
-            $response = $client->post($url, ['headers' => $header, 'body' => $body, 'multipart' => $multipart])->getBody()->getContents();
+            if ($multipart) {
+                $response = $client->post($url, ['headers' => $header, 'multipart' => $multipart])->getBody()->getContents();
+            } else {
+                $response = $client->post($url, ['headers' => $header, 'body' => $body])->getBody()->getContents();
+            }
             if (!$response) {
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
