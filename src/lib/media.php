@@ -22,7 +22,7 @@ use jzweb\open\weixin\lib\core\http;
 class media
 {
 
-    private $getUrl="https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
+    private $getUrl = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
     private $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s";
 
 
@@ -34,9 +34,10 @@ class media
      *
      * @return array
      */
-    public function get($access_token,$media_id){
+    public function get($access_token, $media_id)
+    {
 
-        $requestUrl = sprintf($this->getUrl, $access_token,$media_id);
+        $requestUrl = sprintf($this->getUrl, $access_token, $media_id);
         return http::get($requestUrl);
     }
 
@@ -48,7 +49,7 @@ class media
      * @param string $access_token 调用接口凭证
      * @param string $type 媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）
      * @param string $file_name 上传文件名
-     * @param string $file_path 上传文件路径
+     * @param string $file_path 上传文件路径注：必须是本地资源
      *
      * @return array
      */
@@ -61,7 +62,6 @@ class media
                 'contents' => fopen($file_path, 'r')
             ]
         ]);
-
     }
 
 }
