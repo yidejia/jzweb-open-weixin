@@ -69,6 +69,8 @@ class material
         $requestUrl = sprintf($this->url_get, $access_token);
         if ($type == "news") {
             return http::post($requestUrl, [], json_encode(["media_id" => $media_id]));
+        }elseif($type="video"){
+            return http::post($requestUrl, [], json_encode(["media_id" => $media_id]));
         } else {
             return http::downloadAndSave($requestUrl, $filename, json_encode(["media_id" => $media_id]));
         }
