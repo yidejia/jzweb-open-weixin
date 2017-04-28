@@ -32,7 +32,7 @@ class material
     private $url_get = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=%s";
     private $url_batch_get = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=%s";
     private $url_get_total = "https://api.weixin.qq.com/cgi-bin/material/get_materialcount?access_token=%s";
-    private $url_delete = "https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=%s";
+    private $url_delete = "https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=%s";
 
 
     /**
@@ -53,7 +53,7 @@ class material
     public function batchget($access_token, $type, $offset = 0, $count = 20)
     {
         $requestUrl = sprintf($this->url_batch_get, $access_token);
-        return http::post($requestUrl, [], ["type" => $type, "offset" => $offset, 'count' => $count]);
+        return http::post($requestUrl, [], json_encode(["type" => $type, "offset" => $offset, 'count' => $count]));
     }
 
 
@@ -64,10 +64,14 @@ class material
      * @param string $media_id 素材id
      * @return array
      */
-    public function get($access_token, $media_id)
+    public function get($access_token, $media_id, $type = "", $filename = "")
     {
         $requestUrl = sprintf($this->url_get, $access_token);
-        return http::post($requestUrl, [], ["media_id" => $media_id]);
+        if ($type == "news") {
+            return http::post($requestUrl, [], json_encode(["media_id" => $media_id]));
+        } else {
+            return http::downloadAndSave($requestUrl, $filename, json_encode(["media_id" => $media_id]));
+        }
     }
 
     /**
@@ -85,6 +89,12 @@ class material
     /**
      * 删除永久素材
      *
+     * 在新增了永久素材后，开发者可以根据本接口来删除不再需要的永久素材，节省空间。
+     * 请注意：
+     * 1、请谨慎操作本接口，因为它可以删除公众号在公众平台官网素材管理模块中新建的图文消息、语音、视频等素材（但需要先通过获取素材列表来获知素材的media_id）
+     * 2、临时素材无法通过本接口删除
+     * 3、调用该接口需https协议
+     *
      * @param string $access_token 调用接口凭证
      * @param string $media_id 素材id
      * @return array
@@ -92,7 +102,7 @@ class material
     public function delete($access_token, $media_id)
     {
         $requestUrl = sprintf($this->url_delete, $access_token);
-        return http::post($requestUrl, [], ["media_id" => $media_id]);
+        return http::post($requestUrl, [], json_encode(["media_id" => $media_id]));
     }
 
 
@@ -123,7 +133,7 @@ class material
     public function updateNews($access_token, $data)
     {
         $requestUrl = sprintf($this->url_update_news, $access_token);
-        return http::post($requestUrl, [], $data);
+        return http::post($requestUrl, [], json_encode($data,JSON_UNESCAPED_UNICODE));
     }
 
 
@@ -147,7 +157,7 @@ class material
     public function uploadNews($access_token, $articles)
     {
         $requestUrl = sprintf($this->url_add_news, $access_token);
-        return http::post($requestUrl, [], $articles);
+        return http::post($requestUrl, [], json_encode($articles,JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -155,17 +165,17 @@ class material
      * 本接口所上传的图片不占用公众号的素材库中图片数量的5000个的限制。图片仅支持jpg/png格式，大小必须在1MB以下。
      *
      * @param string $access_token 调用接口凭证
-     * @param string $file_name 上传文件名
      * @param string $file_path 上传文件路径注：必须是本地资源
+     * @param string $form_name 上传表单名称
      * @return array
      */
-    public function uploadNewsImg($access_token, $file_name, $file_path)
+    public function uploadNewsImg($access_token, $file_path, $form_name = "media")
     {
         $requestUrl = sprintf($this->url_add_news_imgs, $access_token);
         return (new http())->post($requestUrl, [], "", [
             [
-                'name' => $file_name,
-                'media' => fopen($file_path, 'r')
+                'name' => $form_name,
+                'contents' => fopen($file_path, 'r')
             ]
         ]);
     }
@@ -174,18 +184,17 @@ class material
      * 上传永久图片素材
      *
      * @param string $access_token 调用接口凭证
-     * @param string $file_name 上传文件名
      * @param string $file_path 上传文件路径注：必须是本地资源
+     * @param string $form_name 上传表单名称
      * @return array
      */
-    public
-    function uploadImage($access_token, $file_name, $file_path)
+    public function uploadImage($access_token, $file_path, $form_name = "media")
     {
         $requestUrl = sprintf($this->url_add_material, $access_token, "image");
         return (new http())->post($requestUrl, [], "", [
             [
-                'name' => $file_name,
-                'media' => fopen($file_path, 'r')
+                'name' => $form_name,
+                'contents' => fopen($file_path, 'r')
             ]
         ]);
     }
@@ -194,17 +203,17 @@ class material
      * 上传永久语音素材
      *
      * @param string $access_token 调用接口凭证
-     * @param string $file_name 上传文件名
      * @param string $file_path 上传文件路径注：必须是本地资源
+     * @param string $form_name 上传表单名称
      * @return array
      */
-    public function uploadVoice($access_token, $file_name, $file_path)
+    public function uploadVoice($access_token, $file_path, $form_name = "media")
     {
         $requestUrl = sprintf($this->url_add_material, $access_token, "voice");
         return (new http())->post($requestUrl, [], "", [
             [
-                'name' => $file_name,
-                'media' => fopen($file_path, 'r')
+                'name' => $form_name,
+                'contents' => fopen($file_path, 'r')
             ]
         ]);
     }
@@ -213,21 +222,24 @@ class material
      * 上传永久缩视频素材
      *
      * @param string $access_token 调用接口凭证
-     * @param string $file_name 上传文件名
      * @param string $file_path 上传文件路径注：必须是本地资源
-     * @param string $title 视频素材的标题
+     * @param string $title 视频素材的标题不能为空
      * @param string $introduction 视频素材的描述
+     * @param string $form_name 上传表单名称
      *
      * @return array
      */
-    public function uploadVideo($access_token, $file_name, $file_path, $title = "", $introduction = "")
+    public function uploadVideo($access_token, $file_path, $title, $introduction = "", $form_name = "media")
     {
         $requestUrl = sprintf($this->url_add_material, $access_token, "video");
         return (new http())->post($requestUrl, [], "", [
             [
-                'name' => $file_name,
-                'media' => fopen($file_path, 'r'),
-                'description' => ['title' => $title, 'introduction' => $introduction]
+                'name' => $form_name,
+                'contents' => fopen($file_path, 'r'),
+            ],
+            [
+                'name' => "description",
+                'contents' => json_encode(['title' => $title, "introduction" => $introduction],JSON_UNESCAPED_UNICODE)
             ]
         ]);
     }
@@ -237,17 +249,17 @@ class material
      * 上传永久缩略图素材
      *
      * @param string $access_token 调用接口凭证
-     * @param string $file_name 上传文件名
      * @param string $file_path 上传文件路径注：必须是本地资源
+     * @param string $form_name 上传表单名称
      * @return array
      */
-    public function uploadThumb($access_token, $file_name, $file_path)
+    public function uploadThumb($access_token, $file_path, $form_name = "media")
     {
         $requestUrl = sprintf($this->url_add_material, $access_token, "thumb");
         return (new http())->post($requestUrl, [], "", [
             [
-                'name' => $file_name,
-                'media' => fopen($file_path, 'r')
+                'name' => $form_name,
+                'contents' => fopen($file_path, 'r')
             ]
         ]);
     }

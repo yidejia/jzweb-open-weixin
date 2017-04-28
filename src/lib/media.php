@@ -48,17 +48,17 @@ class media
      *
      * @param string $access_token 调用接口凭证
      * @param string $type 媒体文件类型，分别有图片（image）、语音（voice）、视频（video）和缩略图（thumb）
-     * @param string $file_name 上传文件名
      * @param string $file_path 上传文件路径注：必须是本地资源
+     * @param string $form_name 上传表单名称
      *
      * @return array
      */
-    public function upload($access_token, $type, $file_name, $file_path)
+    public function upload($access_token, $type, $file_path, $form_name = "media")
     {
         $requestUrl = sprintf($this->url, $access_token, $type);
         return (new http())->post($requestUrl, [], "", [
             [
-                'name' => $file_name,
+                'name' => $form_name,
                 'contents' => fopen($file_path, 'r')
             ]
         ]);
