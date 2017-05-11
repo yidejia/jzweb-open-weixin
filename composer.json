@@ -9,7 +9,7 @@
     }
   ],
   "minimum-stability": "dev",
-  "license" : "MIT",
+  "license": "MIT",
   "require": {
     "php": ">=5.5.0",
     "guzzlehttp/guzzle": "~6.0"

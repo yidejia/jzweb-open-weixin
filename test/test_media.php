@@ -14,7 +14,7 @@ use \jzweb\open\weixin\lib\media;
 
 
 $media=new media();
-$result=$media->upload("lNc5de32W0uH9jKDXIb_jbc-ro7z_uzfJDUDfW1TfMYqSxkQDsHizoQc_1jQweJpUhREq4gKWy-32Dfovi8s7nTUUiEM1dehaJ_XYgDFZLRZI1KBIZnbk6qKdigmnNtcLURaAGDBKH","image","/Users/liusongsen/Downloads/28-28.png");
+$result=$media->upload("Rfha4Yf15pWMOCG2sQLiNvTLoMwS4LLkFW7oqIN7YokerXM7YvUogUEMsdj3BDZzdHQHuL_Ssj7WTh9FWVIqxr9IkhEo0UynUN_Li34RgS06H9KNz0-Xg8EAXncYtamVMDDiAJDXOO","image","/Users/liusongsen/Downloads/28-28.png");
 print_r($result);
 exit;
 
