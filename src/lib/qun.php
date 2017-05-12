@@ -184,7 +184,21 @@ class qun
         } elseif ($msg_type == "wxcard") {
             $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), "wxcard" => array('card_id' => $content), 'msgtype' => "wxcard", 'send_ignore_reprint' => $send_ignore_reprint);
         } elseif ($msg_type == "video") {
-            $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), "mpvideo" => $content, 'msgtype' => "mpvideo", 'send_ignore_reprint' => $send_ignore_reprint);
+            //获取永久素材
+            $video_info = (new material())->get($access_token, $content, "video");
+            //转换群发视频素材
+            $mp_video_info = $this->uploadVideo($access_token, $content, $video_info['title'], $video_info['description']);
+            //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
+            $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), "mpvideo" => array('media_id' => $mp_video_info['media_id'], 'title' => $video_info['title'], 'description' => $video_info['description']), 'msgtype' => "mpvideo", 'send_ignore_reprint' => $send_ignore_reprint);
+        } elseif ($msg_type == "news") {
+            //获取永久素材
+            $news_info = (new material())->get($access_token, $content, "news");
+            //转换结构
+            $articles = array('articles' => $news_info['news_item']);
+            //新增群发图文素材
+            $mp_news_info = $this->uploadNews($access_token, $articles);
+            //组装数据
+            $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), "mpnews" => array('media_id' => $mp_news_info['media_id']), 'msgtype' => "mpnews", 'send_ignore_reprint' => $send_ignore_reprint);
         } else {
             $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), $msg_type => array('media_id' => $content), 'msgtype' => $msg_type, 'send_ignore_reprint' => $send_ignore_reprint);
         }
@@ -235,7 +249,21 @@ class qun
         } elseif ($msg_type == "wxcard") {
             $postData = array("touser" => $to_user, "wxcard" => array('card_id' => $content), 'msgtype' => "wxcard", 'send_ignore_reprint' => $send_ignore_reprint);
         } elseif ($msg_type == "video") {
-            $postData = array("touser" => $to_user, "mpvideo" => $content, 'msgtype' => "mpvideo", 'send_ignore_reprint' => $send_ignore_reprint);
+            //获取永久素材
+            $video_info = (new material())->get($access_token, $content, "video");
+            //转换群发视频素材
+            $mp_video_info = $this->uploadVideo($access_token, $content, $video_info['title'], $video_info['description']);
+            //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
+            $postData = array("touser" => $to_user, "mpvideo" => array('media_id' => $mp_video_info['media_id'], 'title' => $video_info['title'], 'description' => $video_info['description']), 'msgtype' => "mpvideo", 'send_ignore_reprint' => $send_ignore_reprint);
+        } elseif ($msg_type == "news") {
+            //获取永久素材
+            $news_info = (new material())->get($access_token, $content, "news");
+            //转换结构
+            $articles = array('articles' => $news_info['news_item']);
+            //新增群发图文素材
+            $mp_news_info = $this->uploadNews($access_token, $articles);
+            //转换数据
+            $postData = array("touser" => $to_user, "mpnews" => array('media_id' => $mp_news_info['media_id']), 'msgtype' => "mpnews", 'send_ignore_reprint' => $send_ignore_reprint);
         } else {
             $postData = array("touser" => $to_user, $msg_type => array('media_id' => $content), 'msgtype' => $msg_type, 'send_ignore_reprint' => $send_ignore_reprint);
         }
@@ -279,6 +307,22 @@ class qun
             $postData = array(($flag ? "towxname" : "touser") => $to_user, "text" => array('content' => $content), 'msgtype' => "text");
         } elseif ($msg_type == "wxcard") {
             $postData = array(($flag ? "towxname" : "touser") => $to_user, "wxcard" => $content, 'msgtype' => "wxcard");
+        } elseif ($msg_type == "video") {
+            //获取永久素材
+            $video_info = (new material())->get($access_token, $content, "video");
+            //转换群发视频素材
+            $mp_video_info = $this->uploadVideo($access_token, $content, $video_info['title'], $video_info['description']);
+            //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
+            $postData = array(($flag ? "towxname" : "touser") => $to_user, "mpvideo" => array('media_id' => $mp_video_info['media_id']), 'msgtype' => "mpvideo");
+        } elseif ($msg_type == "news") {
+            //获取永久素材
+            $news_info = (new material())->get($access_token, $content, "news");
+            //转换结构
+            $articles = array('articles' => $news_info['news_item']);
+            //新增群发图文素材
+            $mp_news_info = $this->uploadNews($access_token, $articles);
+            //组装数据
+            $postData = array(($flag ? "towxname" : "touser") => $to_user, "mpnews" => array('media_id' => $mp_news_info['media_id']), 'msgtype' => "mpnews");
         } else {
             $postData = array(($flag ? "towxname" : "touser") => $to_user, $msg_type => array('media_id' => $content), 'msgtype' => $msg_type);
         }
