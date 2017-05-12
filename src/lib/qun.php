@@ -186,17 +186,29 @@ class qun
         } elseif ($msg_type == "video") {
             //获取永久素材
             $video_info = (new material())->get($access_token, $content, "video");
+            if (isset($video_info['code'])) {
+                return $video_info;
+            }
             //转换群发视频素材
             $mp_video_info = $this->uploadVideo($access_token, $content, $video_info['title'], $video_info['description']);
+            if(isset($mp_video_info['code'])){
+                return $mp_video_info;
+            }
             //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
             $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), "mpvideo" => array('media_id' => $mp_video_info['media_id'], 'title' => $video_info['title'], 'description' => $video_info['description']), 'msgtype' => "mpvideo", 'send_ignore_reprint' => $send_ignore_reprint);
         } elseif ($msg_type == "news") {
             //获取永久素材
             $news_info = (new material())->get($access_token, $content, "news");
+            if (isset($news_info['code'])) {
+                return $news_info;
+            }
             //转换结构
             $articles = array('articles' => $news_info['news_item']);
             //新增群发图文素材
             $mp_news_info = $this->uploadNews($access_token, $articles);
+            if (isset($news_info['code'])) {
+                return $mp_news_info;
+            }
             //组装数据
             $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), "mpnews" => array('media_id' => $mp_news_info['media_id']), 'msgtype' => "mpnews", 'send_ignore_reprint' => $send_ignore_reprint);
         } else {
@@ -251,17 +263,29 @@ class qun
         } elseif ($msg_type == "video") {
             //获取永久素材
             $video_info = (new material())->get($access_token, $content, "video");
+            if (isset($video_info['code'])) {
+                return $video_info;
+            }
             //转换群发视频素材
             $mp_video_info = $this->uploadVideo($access_token, $content, $video_info['title'], $video_info['description']);
+            if(isset($mp_video_info['code'])){
+                return $mp_video_info;
+            }
             //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
             $postData = array("touser" => $to_user, "mpvideo" => array('media_id' => $mp_video_info['media_id'], 'title' => $video_info['title'], 'description' => $video_info['description']), 'msgtype' => "mpvideo", 'send_ignore_reprint' => $send_ignore_reprint);
         } elseif ($msg_type == "news") {
             //获取永久素材
             $news_info = (new material())->get($access_token, $content, "news");
+            if (isset($news_info['code'])) {
+                return $news_info;
+            }
             //转换结构
             $articles = array('articles' => $news_info['news_item']);
             //新增群发图文素材
             $mp_news_info = $this->uploadNews($access_token, $articles);
+            if (isset($news_info['code'])) {
+                return $mp_news_info;
+            }
             //转换数据
             $postData = array("touser" => $to_user, "mpnews" => array('media_id' => $mp_news_info['media_id']), 'msgtype' => "mpnews", 'send_ignore_reprint' => $send_ignore_reprint);
         } else {
@@ -310,17 +334,29 @@ class qun
         } elseif ($msg_type == "video") {
             //获取永久素材
             $video_info = (new material())->get($access_token, $content, "video");
+            if (isset($video_info['code'])) {
+                return $video_info;
+            }
             //转换群发视频素材
             $mp_video_info = $this->uploadVideo($access_token, $content, $video_info['title'], $video_info['description']);
+            if(isset($mp_video_info['code'])){
+                return $mp_video_info;
+            }
             //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
             $postData = array(($flag ? "towxname" : "touser") => $to_user, "mpvideo" => array('media_id' => $mp_video_info['media_id']), 'msgtype' => "mpvideo");
         } elseif ($msg_type == "news") {
             //获取永久素材
             $news_info = (new material())->get($access_token, $content, "news");
+            if (isset($news_info['code'])) {
+                return $news_info;
+            }
             //转换结构
             $articles = array('articles' => $news_info['news_item']);
             //新增群发图文素材
             $mp_news_info = $this->uploadNews($access_token, $articles);
+            if (isset($news_info['code'])) {
+                return $mp_news_info;
+            }
             //组装数据
             $postData = array(($flag ? "towxname" : "touser") => $to_user, "mpnews" => array('media_id' => $mp_news_info['media_id']), 'msgtype' => "mpnews");
         } else {
