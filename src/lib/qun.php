@@ -342,7 +342,7 @@ class qun
             if(isset($mp_video_info['code'])){
                 return $mp_video_info;
             }
-            //todo 组装数据 是否支持视频缩略图的媒体ID thumb_media_id???
+            //组装数据
             $postData = array(($flag ? "towxname" : "touser") => $to_user, "mpvideo" => array('media_id' => $mp_video_info['media_id']), 'msgtype' => "mpvideo");
         } elseif ($msg_type == "news") {
             //获取永久素材
