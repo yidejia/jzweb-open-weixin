@@ -12,7 +12,7 @@ use jzweb\open\weixin\lib\core\http;
 class qun
 {
 
-    private $url_add_news_imgs = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=ACCESS_TOKEN";
+    private $url_add_news_imgs = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=%s";
     private $url_uploadvideo = "https://api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token=%s";
     private $url_uploadnews = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=%s";
     private $url_sendall = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s";
