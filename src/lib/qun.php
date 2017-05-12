@@ -13,13 +13,13 @@ class qun
 {
 
     private $url_add_news_imgs = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=%s";
-    private $url_uploadvideo = "https://api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token=%s";
     private $url_uploadnews = "https://api.weixin.qq.com/cgi-bin/media/uploadnews?access_token=%s";
-    private $url_sendall = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s";
+    private $url_uploadvideo = "https://api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token=%s";
     private $url_send = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=%s";
-    private $url_delete = "https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token=%s";
-    private $url_preview = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=%s";
+    private $url_sendall = "https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token=%s";
     private $url_get = "https://api.weixin.qq.com/cgi-bin/message/mass/get?access_token=%s";
+    private $url_preview = "https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token=%s";
+    private $url_delete = "https://api.weixin.qq.com/cgi-bin/message/mass/delete?access_token=%s";
 
 
     /**
@@ -29,7 +29,7 @@ class qun
      *
      * 返回数据实例：
      * {
-     *      "url":  "http://mmbiz.qpic.cn/mmbiz/gLO17UPS6FS2xsypf378iaNhWacZ1G1UplZYWEYfwvuU6Ont96b1roYs CNFwaRrSaKTPCUdBK9DgEHicsKwWCBRQ/0"
+     *      "url":  "http://mmbiz.qpic.cn/mmbiz/gLO17UPS6FS2xsypf378iaNhWacZ1G1UplZYWEYfwvuU6Ont96b1roYsCNFwaRrSaKTPCUdBK9DgEHicsKwWCBRQ/0"
      * }
      *
      * @param string $access_token 调用接口凭证
@@ -115,7 +115,7 @@ class qun
     {
         $requestUrl = sprintf($this->url_uploadvideo, $access_token);
         $postData = array("media_id" => $media_id, "title" => $title, "description" => $description);
-        return (new http())->post($requestUrl, [], json_encode($postData));
+        return (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 
 
@@ -138,7 +138,7 @@ class qun
     {
         $requestUrl = sprintf($this->url_get, $access_token);
         $postData = array("msg_id" => $msg_id,);
-        return (new http())->post($requestUrl, [], json_encode($postData));
+        return (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 
 
@@ -188,7 +188,7 @@ class qun
         } else {
             $postData = array("filter" => array('is_to_all' => $is_to_all, 'tag_id' => $tag_id), $msg_type => array('media_id' => $content), 'msgtype' => $msg_type, 'send_ignore_reprint' => $send_ignore_reprint);
         }
-        return (new http())->post($requestUrl, [], json_encode($postData));
+        return (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 
 
@@ -239,7 +239,7 @@ class qun
         } else {
             $postData = array("touser" => $to_user, $msg_type => array('media_id' => $content), 'msgtype' => $msg_type, 'send_ignore_reprint' => $send_ignore_reprint);
         }
-        return (new http())->post($requestUrl, [], json_encode($postData));
+        return (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -282,7 +282,7 @@ class qun
         } else {
             $postData = array(($flag ? "towxname" : "touser") => $to_user, $msg_type => array('media_id' => $content), 'msgtype' => $msg_type);
         }
-        return (new http())->post($requestUrl, [], json_encode($postData));
+        return (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -309,6 +309,6 @@ class qun
     {
         $requestUrl = sprintf($this->url_delete, $access_token);
         $postData = array("msg_id" => $msg_id, 'article_idx' => $article_ids);
-        return (new http())->post($requestUrl, [], json_encode($postData));
+        return (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
     }
 }

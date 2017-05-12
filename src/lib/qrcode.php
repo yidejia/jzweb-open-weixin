@@ -49,7 +49,7 @@ class qrcode
             "action_name" => "QR_SCENE",
             "action_info" => array("scene" => array("scene_id" => $scene_id))
         );
-        $result = (new http())->post($requestUrl, [], json_encode($postData));
+        $result = (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
         if (isset($result['code'])) {
             return $result;
         } else {
@@ -73,7 +73,7 @@ class qrcode
             "action_name" => "QR_LIMIT_STR_SCENE",
             "action_info" => array("scene" => array("scene_str" => $scene_id))
         );
-        $result = (new http())->post($requestUrl, [], json_encode($postData));
+        $result = (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
         if (isset($result['code'])) {
             return $result;
         } else {
