@@ -22,7 +22,7 @@ use jzweb\open\weixin\lib\core\http;
 class media
 {
 
-    private $getUrl = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
+    private $getUrl = "https://api.weixin.qq.com/cgi-bin/media/get?access_token=%s&media_id=%s";
     private $url = "https://api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s";
 
 
