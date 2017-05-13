@@ -170,7 +170,6 @@ class qun
         return $this->uploadNews($access_token, array('articles' => $data));
     }
 
-
     /**
      * 群发接口图文消息-永久视频素材转换
      *
@@ -187,6 +186,25 @@ class qun
         }
         //转换群发视频素材
         return $this->uploadVideo($access_token, $video_info['media_id'], $data['title'], $data['introduction']);
+    }
+
+
+    /**
+     * 群发接口图文消息-永久语音素材转换
+     *
+     * @param string $access_token
+     * @param array $data
+     *
+     * @return array
+     */
+    public function transVideoFromMaterialVoice($access_token, $data)
+    {
+        $voice_info = (new media())->upload($access_token, "voice", $data['url_local_file']);
+        if (isset($voice_info['code'])) {
+            return $voice_info;
+        }
+        //转换群发视频素材
+        return $this->uploadVideo($access_token, $voice_info['media_id'], $data['title'], $data['introduction']);
     }
 
 
