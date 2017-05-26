@@ -78,7 +78,7 @@ class http
             if(!$data){
                 return exception::handle(array('code' => 0, 'msg' => "解析后的内容为空", 'desc' => "返回的内容包含有非法字符"));
             }
-            
+
             if (is_array($data) && isset($data['errcode'])) {
                 return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
             }
