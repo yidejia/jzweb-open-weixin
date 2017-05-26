@@ -28,8 +28,15 @@ class http
             if (!$response) {
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
+            //json_decode can not handle string like:\u0014,it will return null,and with the error
+            $response = preg_replace_callback('/([\x{0000}-\x{0008}]|[\x{000b}-\x{000c}]|[\x{000E}-\x{001F}])/u', function($sub_match){return '?00' . dechex(ord($sub_match[1]));},$response);
+
             // 转化数据格式
             $data = json_decode($response, true);
+            if(!$data){
+                return exception::handle(array('code' => 0, 'msg' => "解析后的内容为空", 'desc' => "返回的内容包含有非法字符"));
+            }
+
             if (is_array($data) && isset($data['errcode'])) {
                 return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
             }
@@ -63,8 +70,15 @@ class http
             if (!$response) {
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
+
+            $response = preg_replace_callback('/([\x{0000}-\x{0008}]|[\x{000b}-\x{000c}]|[\x{000E}-\x{001F}])/u', function($sub_match){return '?00' . dechex(ord($sub_match[1]));},$response);
+
             // 转化数据格式
             $data = json_decode($response, true);
+            if(!$data){
+                return exception::handle(array('code' => 0, 'msg' => "解析后的内容为空", 'desc' => "返回的内容包含有非法字符"));
+            }
+            
             if (is_array($data) && isset($data['errcode'])) {
                 return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
             }
