@@ -81,6 +81,7 @@ class exception
         45016 => array('msg' => "can't modify sys group", 'desc' => '不能修改默认组'),
         45017 => array('msg' => "can't set group name too long sys group", 'desc' => '修改组名过长'),
         45018 => array('msg' => 'too many group now, no need to add new', 'desc' => '组数量过多'),
+        48001 => array('msg' => 'api unauthorized', 'desc' => '接口未授权'),
         50001 => array('msg' => 'api unauthorized', 'desc' => '接口未授权')
     );
 
