@@ -30,15 +30,18 @@ class media
      * 获取素材详情
      *
      * @param string $access_token 调用接口凭证
-     * @param string $media_id 媒体文件ID
-     *
+     * @param string $media_id 素材id
      * @return array
      */
-    public function get($access_token, $media_id)
+    public function get($access_token, $media_id, $type = "", $filename = "")
     {
-
-        $requestUrl = sprintf($this->getUrl, $access_token, $media_id);
-        return http::get($requestUrl);
+        if ($type == "voice" || $type == "video") {
+            $requestUrl = sprintf($this->getUrl, $access_token, $media_id);
+            return http::downloadAndSave($requestUrl, $filename);
+        } else {
+            $requestUrl = sprintf($this->getUrl, $access_token, $media_id);
+            return http::get($requestUrl);
+        }
     }
 
     /**
