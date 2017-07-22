@@ -38,6 +38,21 @@ class wxLogin
     }
 
     /**
+     * 第一步： 构造获取code的地址
+     * 开放平台代公众号实现
+     *
+     * @param string $redirect_uri 重定向地址，需要进行UrlEncode
+     * @param string $component_appid 服务开发商的appid
+     * @param string $state 用于保持请求和回调的状态，授权请求后原样带回给第三方。该参数可用于防止csrf攻击（跨站请求伪造攻击），建议第三方带上该参数，可设置为简单的随机数加session进行校验
+     *
+     * @return string
+     */
+    public function getCodeUrl2($redirect_uri, $component_appid, $state = "")
+    {
+        return (new code())->getCode3Url($this->app_id, $redirect_uri, $component_appid, "code", "snsapi_userinfo", $state);
+    }
+
+    /**
      * 第二步：获取access_token
      *
      *
