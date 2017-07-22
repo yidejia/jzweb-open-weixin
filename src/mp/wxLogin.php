@@ -50,6 +50,22 @@ class wxLogin
         return (new accessToken())->getAccessTokenByCode($this->app_id, $this->secret, $code);
     }
 
+    /**
+     * 第二步：获取access_token
+     * 开放平台代公众号实现
+     *
+     *
+     * @param string $code 第一步授权后获取到的code
+     * @param string $component_appid 服务开发商的appid
+     * @param string $component_access_token 服务开发方的access_token
+     *
+     * @return array
+     */
+    public function getAccessToken2($code, $component_appid, $component_access_token)
+    {
+        return (new accessToken())->getAccessTokenByCode2($this->app_id, $code, $component_appid, $component_access_token);
+    }
+
 
     /**
      * 第三步：获取微信用户信息
