@@ -29,16 +29,22 @@ class http
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
             //json_decode can not handle string like:\u0014,it will return null,and with the error
-            $response = preg_replace_callback('/([\x{0000}-\x{0008}]|[\x{000b}-\x{000c}]|[\x{000E}-\x{001F}])/u', function($sub_match){return '?00' . dechex(ord($sub_match[1]));},$response);
+            $response = preg_replace_callback('/([\x{0000}-\x{0008}]|[\x{000b}-\x{000c}]|[\x{000E}-\x{001F}])/u', function ($sub_match) {
+                return '?00' . dechex(ord($sub_match[1]));
+            }, $response);
 
             // 转化数据格式
             $data = json_decode($response, true);
-            if(!$data){
+            if (!$data) {
                 return exception::handle(array('code' => 0, 'msg' => "解析后的内容为空", 'desc' => "返回的内容包含有非法字符"));
             }
 
             if (is_array($data) && isset($data['errcode'])) {
-                return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
+                if ($data['errcode'] == 0 && $data['errmsg'] == "ok" && count($data) > 2) {
+                    return $data;
+                } else {
+                    return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
+                }
             }
             // 返回结果
             return $data;
@@ -71,16 +77,22 @@ class http
                 return exception::handle(array('code' => 0, 'msg' => "返回的内容为空", 'desc' => "返回的内容为空"));
             }
 
-            $response = preg_replace_callback('/([\x{0000}-\x{0008}]|[\x{000b}-\x{000c}]|[\x{000E}-\x{001F}])/u', function($sub_match){return '?00' . dechex(ord($sub_match[1]));},$response);
+            $response = preg_replace_callback('/([\x{0000}-\x{0008}]|[\x{000b}-\x{000c}]|[\x{000E}-\x{001F}])/u', function ($sub_match) {
+                return '?00' . dechex(ord($sub_match[1]));
+            }, $response);
 
             // 转化数据格式
             $data = json_decode($response, true);
-            if(!$data){
+            if (!$data) {
                 return exception::handle(array('code' => 0, 'msg' => "解析后的内容为空", 'desc' => "返回的内容包含有非法字符"));
             }
 
             if (is_array($data) && isset($data['errcode'])) {
-                return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
+                if ($data['errcode'] == 0 && $data['errmsg'] == "ok" && count($data) > 2) {
+                    return $data;
+                } else {
+                    return exception::handle(array('code' => $data['errcode'], 'msg' => $data['errmsg']));
+                }
             }
             // 返回结果
             return $data;
@@ -101,11 +113,11 @@ class http
 
         try {
             $client = new \GuzzleHttp\Client(['verify' => false]);  //忽略SSL错误
-            $data=$client->post($url, ['body' => $body, 'timeout' => 60, 'save_to' => $save_file_path])->getHeaders();  //保存远程url到文件
-            if($result=json_decode(file_get_contents($save_file_path),true)){
+            $data = $client->post($url, ['body' => $body, 'timeout' => 60, 'save_to' => $save_file_path])->getHeaders();  //保存远程url到文件
+            if ($result = json_decode(file_get_contents($save_file_path), true)) {
                 return exception::handle(array('code' => $result['errcode'], 'msg' => $result['errmsg']));
-            }else{
-                return array('attachment'=>$data['Content-disposition'],'file'=>$save_file_path);
+            } else {
+                return array('attachment' => $data['Content-disposition'], 'file' => $save_file_path);
             }
 
         } catch (\Exception $e) {
