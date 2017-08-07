@@ -2,6 +2,7 @@
 namespace jzweb\open\weixin\mp;
 
 use jzweb\open\weixin\lib\accessToken;
+use jzweb\open\weixin\lib\api;
 use jzweb\open\weixin\lib\code;
 use jzweb\open\weixin\lib\custom;
 use jzweb\open\weixin\lib\user;
@@ -151,4 +152,17 @@ class wxLogin
         return (new custom())->send($type, $access_token, $openid, $data);
     }
 
+
+    /**
+     * 数据清零,每个公众号每月有10次清零机会
+     * 公众号调用或第三方平台帮公众号调用对公众号的所有api调用（包括第三方帮其调用）次数进行清零
+     *
+     * @param $access_token
+     * @return mixed
+     */
+    public function clearQuota($access_token)
+    {
+
+        return (new api())->clearQuota($access_token, $this->app_id);
+    }
 }
