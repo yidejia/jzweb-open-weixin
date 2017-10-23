@@ -37,18 +37,26 @@ class qrcode
      * 30天时效限制，无数量限制
      *
      * @param string $access_token 调用接口凭证
-     * @param int $scene_id
+     * @param int|string $scene_id
      * @param int $expire_time
      * @return array
      */
     public function createQrScane($access_token, $scene_id, $expire_time = 2592000)
     {
         $requestUrl = sprintf($this->url, $access_token);
-        $postData = array(
-            "expire_seconds" => $expire_time,
-            "action_name" => "QR_SCENE",
-            "action_info" => array("scene" => array("scene_id" => $scene_id))
-        );
+        if(is_numeric($scene_id)) {
+            $postData = array(
+                "expire_seconds" => $expire_time,
+                "action_name" => "QR_SCENE",
+                "action_info" => array("scene" => array("scene_id" => $scene_id))
+            );
+        }else{
+            $postData = array(
+                "expire_seconds" => $expire_time,
+                "action_name" => "QR_STR_SCENE",
+                "action_info" => array("scene" => array("scene_str" => $scene_id))
+            );
+        }
         $result = (new http())->post($requestUrl, [], json_encode($postData, JSON_UNESCAPED_UNICODE));
         if (isset($result['code'])) {
             return $result;
