@@ -2,6 +2,7 @@
 namespace jzweb\open\weixin\lib;
 
 use jzweb\open\weixin\lib\core\http;
+use jzweb\open\weixin\lib\wxBiz\WXBizMsgCrypt;
 
 /**
  * 微信小程序
@@ -43,6 +44,28 @@ class wxa
     {
         $requestUrl = sprintf($this->getSessionKeyUrl, $app_id, $secret, $js_code, $grant_type);
         return http::get($requestUrl);
+    }
+
+    /**
+     * 对微信小程序用户加密数据的解密示例代码
+     *
+     * @param string $appid
+     * @param string $sessionKey
+     * @param string $encryptedData
+     * @param string $iv
+     * @param array $data
+     * @return array
+     */
+    public function decryptData($appid, $sessionKey, $encryptedData, $iv,&$data)
+    {
+        $errCode = WXBizMsgCrypt::decryptWXAData($appid,$sessionKey,$encryptedData, $iv, $data);
+        if ($errCode == 0) {
+            $data= json_decode($data,true);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
 
