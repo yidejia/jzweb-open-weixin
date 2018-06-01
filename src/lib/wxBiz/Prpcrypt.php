@@ -34,7 +34,7 @@ class Prpcrypt
             $text = $pkc_encoder->encode($text);
             $encrypted = openssl_encrypt($text,'AES-256-CBC',substr($this->key, 0, 32),OPENSSL_ZERO_PADDING,$iv);
             return array(ErrorCode::$OK, $encrypted);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return array(ErrorCode::$EncryptAESError, null);
         }
     }
@@ -48,7 +48,7 @@ class Prpcrypt
         try {
             $iv = substr($this->key, 0, 16);
             $decrypted = openssl_decrypt($encrypted,'AES-256-CBC',substr($this->key, 0, 32),OPENSSL_ZERO_PADDING,$iv);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return array(ErrorCode::$DecryptAESError, null);
         }
         try {
@@ -66,7 +66,7 @@ class Prpcrypt
             if (!$appid)
                 $appid = $from_appid;
             //如果传入的appid是空的，则认为是订阅号，使用数据中提取出来的appid
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             //print $e;
             return array(ErrorCode::$IllegalBuffer, null);
         }
