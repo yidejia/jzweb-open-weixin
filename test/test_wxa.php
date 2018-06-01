@@ -5,28 +5,12 @@ include "../vendor/autoload.php";
 use jzweb\open\weixin\lib\wxa;
 
 
-$appid = 'wx4f4bc4dec97d474b';
-$sessionKey = 'tiihtNczf5v6AKRyjwEUhQ==';
+$appid = 'wx5d2eb35c8cf1c873';
+$sessionKey = 'vxmazFVPegFrg2qXW5808g==';
 
-$encryptedData = "CiyLU1Aw2KjvrjMdj8YKliAjtP4gsMZM
-                QmRzooG2xrDcvSnxIMXFufNstNGTyaGS
-                9uT5geRa0W4oTOb1WT7fJlAC+oNPdbB+
-                3hVbJSRgv+4lGOETKUQz6OYStslQ142d
-                NCuabNPGBzlooOmB231qMM85d2/fV6Ch
-                evvXvQP8Hkue1poOFtnEtpyxVLW1zAo6
-                /1Xx1COxFvrc2d7UL/lmHInNlxuacJXw
-                u0fjpXfz/YqYzBIBzD6WUfTIF9GRHpOn
-                /Hz7saL8xz+W//FRAUid1OksQaQx4CMs
-                8LOddcQhULW4ucetDf96JcR3g0gfRK4P
-                C7E/r7Z6xNrXd2UIeorGj5Ef7b1pJAYB
-                6Y5anaHqZ9J6nKEBvB4DnNLIVWSgARns
-                /8wR2SiRS7MNACwTyrGvt9ts8p12PKFd
-                lqYTopNHR1Vf7XjfhQlVsAJdNiKdYmYV
-                oKlaRv85IfVunYzO0IKXsyl7JCUjCpoG
-                20f0a04COwfneQAGGwd5oa+T8yO5hzuy
-                Db/XcxxmK01EpqOyuxINew==";
+$encryptedData = "vjwZs92PoxxjlvNOiudrtUuLQsrHK8d2aYBkWNWifbnABInqqcfHyNh8xMCO0CCE9wbPgsCC5jwqI7dLOEa4yKvlOFl0RpNfE1+2qEbNQWx6mQmmSofYF4YhzTvPI2UNrFiVL+jnanlUnDuTatprlN1xhdqJtDbfnbFJqggXszSWXS0pyAlfv5a0TjdNpxuM7guw7zJyK0PBybmrf3P8+aVZa/f6zs2uvRfOMAWBeAvd4KF7AtR3XAnxu4wwuK4DiNrj/ZhswkBWNfz84tLobtxEATm8YsZiMux5ogMx4YhADhwl1V0Be25uPmAP9qe7ZOnlI6B6agHJ+l1Z+beR3c2PO75GDaPdObEUe1Cf8gbTbH8WxNc5cOEetiu+6wNhGFZ3h/Bu019pbKotxYc3ChxnDTq2e72uJ6s5pyYUqj1fbrePBoSaQL62HqNCs1eGMUdXpElaeI1eyhB5VVODw8C46ewpSpCxgaz/INNXtCJlDafltgTscZFI6qibSYsXgnyRivIgJ3aXIUWlqviF3g==";
 
-$iv = 'r7BXXKkLb8qrSNn05n0qiA==';
+$iv = '7slnzbIdR3nKnJKLSfBS1w==';
 
 $data = "";
 $errCode = (new wxa())->decryptData($appid, $sessionKey, $encryptedData, $iv, $data);
